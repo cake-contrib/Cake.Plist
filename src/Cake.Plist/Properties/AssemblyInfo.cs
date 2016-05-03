@@ -21,6 +21,7 @@ using System.Runtime.InteropServices;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 [assembly: Guid("143925d6-5413-4013-88bb-520857259deb")]
+[assembly:InternalsVisibleTo("Cake.Plist.Tests")]
 
 // Version information for an assembly consists of the following four values:
 //
