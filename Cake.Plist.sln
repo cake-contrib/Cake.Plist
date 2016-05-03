@@ -3,8 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Plist", "src\Cake.Plist\Cake.Plist.csproj", "{143925D6-5413-4013-88BB-520857259DEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B4AA6F26-0359-449D-BBF5-81859BF3F88B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{03EDD651-5062-4A4B-9D3F-14F6B7861753}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Plist.Tests", "tests\Cake.Plist.Tests\Cake.Plist.Tests.csproj", "{E826C949-43BF-4B3E-8B45-4B5A597B40B7}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{143925D6-5413-4013-88BB-520857259DEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{143925D6-5413-4013-88BB-520857259DEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{143925D6-5413-4013-88BB-520857259DEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{143925D6-5413-4013-88BB-520857259DEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E826C949-43BF-4B3E-8B45-4B5A597B40B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E826C949-43BF-4B3E-8B45-4B5A597B40B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E826C949-43BF-4B3E-8B45-4B5A597B40B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E826C949-43BF-4B3E-8B45-4B5A597B40B7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{143925D6-5413-4013-88BB-520857259DEB} = {B4AA6F26-0359-449D-BBF5-81859BF3F88B}
+		{E826C949-43BF-4B3E-8B45-4B5A597B40B7} = {03EDD651-5062-4A4B-9D3F-14F6B7861753}
 	EndGlobalSection
 EndGlobal
