@@ -1,34 +1,28 @@
-# Cake.HockeyApp Addin 
+# Cake.Plist Addin 
 
-![AppVeyor master branch](https://img.shields.io/appveyor/ci/reicheltp/cake-hockeyapp.svg)
-![nuget pre release](https://img.shields.io/nuget/vpre/Cake.HockeyApp.svg)
+[//]: # (![AppVeyor master branch](https://img.shields.io/appveyor/ci/reicheltp/cake-Plist.svg))
+![nuget pre release](https://img.shields.io/nuget/vpre/Cake.Plist.svg)
 
-This Addin for the Cake Build Automation System allows you to deploy your package to HockeyApp. More about Cake at http://cakebuild.net
+This Addin for the Cake Build Automation System allows you to serialize and deserialize xml plists. More about Cake at http://cakebuild.net
 
 ## Use the addin
 
-To use the HockeyApp in your cake file simply import it and define a publish task.
+To use the Plist in your cake file simply import it and define a task. In the following example we are updating the Info.plist of our iOS project.
 ```cake
-#addin "Cake.HockeyApp"
+#addin "Cake.Plist"
 
-Task("deploy")
+Task("update-ios-version")
     .Does(() => 
     {
-        UploadToHockeyApp( pathToYourPackageFile, new HockeyAppUploadSettings 
-        {
-            AppId = appIdFromHockeyApp,
-            Version = "1.0.160901.1",
-            ShortVersion = "1.0-beta2",
-            Notes = "Uploaded via continuous integration."
-        });
+        var plist = File("./src/Demo/Info.plist");
+        var data = DeserializePlist(plist);
+        
+        data["CFBundleShortVersionString"] = version.AssemblySemVer;
+        data["CFBundleVersion"] = version.FullSemVer;
+        
+        SerializePlist(plist, data);
     });
 ```
-
-The available parameters for the upload settings are descripted here: http://support.hockeyapp.net/kb/api/api-versions#upload-version
-
-`AppId`, `ApiToken` and `Version` are **required parameters** you have to set. 
-
->   Do not checkin the HockeyApp API Token into your source control. Either use `HockeyAppUploadSettings.ApiToken` or the `HOCKEYAPP_API_TOKEN` environment variable.
 
 ## Build
 
