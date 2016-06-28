@@ -14,7 +14,7 @@
     public static class PlistAliases
     {
         /// <summary>
-        ///     Desierializes plist from xlm
+        ///     Desierializes plist from xml
         /// </summary>
         /// <param name="context"></param>
         /// <param name="xml">plist xml</param>
