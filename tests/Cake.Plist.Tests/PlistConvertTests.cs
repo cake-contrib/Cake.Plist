@@ -1,4 +1,4 @@
-﻿namespace Cake.Plist.Tests.Fixtures
+﻿namespace Cake.Plist.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -8,9 +8,8 @@
     using System.Xml.Linq;
     using Xunit;
 
-    public sealed class PlistConvertFixtures
+    public sealed class PlistConvertTests
     {
-
         [Theory]
         [InlineData("<true />", true)]
         [InlineData("<false />", false)]
@@ -18,9 +17,8 @@
         [InlineData("<integer>5</integer>", 5)]
         [InlineData("<real>5.1234</real>", 5.1234)]
         [InlineData("<array />", new object[0])]
-        [InlineData("<data>oqO0</data>", new byte[] { 0xA2, 0xA3, 0xB4 })]
-        [InlineData("<array><string>Test1</string><string>Test2</string></array>", new [] {"Test1", "Test2"})]
-
+        [InlineData("<data>oqO0</data>", new byte[] {0xA2, 0xA3, 0xB4})]
+        [InlineData("<array><string>Test1</string><string>Test2</string></array>", new[] {"Test1", "Test2"})]
         public void CanDeserializePlistEntry(string value, object expected)
         {
             // Act
@@ -31,39 +29,22 @@
             Assert.Equal(expected, item);
         }
 
-        [Fact]
-        public void CanDeserializePlistDateTime()
+        [Theory]
+        [InlineData(true, "<true />")]
+        [InlineData(false, "<false />")]
+        [InlineData("Hallo", "<string>Hallo</string>")]
+        [InlineData(5, "<integer>5</integer>")]
+        [InlineData(5.1234, "<real>5.1234</real>")]
+        [InlineData(new object[0], "<array />")]
+        [InlineData(new byte[] {0xA2, 0xA3, 0xB4}, "<data>oqO0</data>")]
+        [InlineData(new[] {"Test1", "Test2"}, "<array><string>Test1</string><string>Test2</string></array>")]
+        public void CanSerializePlistEntry(object value, string expected)
         {
-            // Arrange
-            var value = "<date>2016-05-03T11:40:00+00:00</date>";
-            var expected = new DateTimeOffset(2016, 05, 03, 11, 40, 00, TimeSpan.Zero);
-
             // Act
-            var element = XElement.Parse(value);
-            var item = PlistConvert.Deserialize(element);
+            var item = PlistConvert.Serialize(value);
 
             // Assert
-            Assert.Equal(expected, item);
-        }
-
-        [Fact]
-        public void CanDeserializeDict()
-        {
-            // Arrange
-            var value = "<dict><key>k1</key><string>v1</string><key>k2</key><integer>3</integer></dict>";
-
-            var expected = new Dictionary<string, object>
-            {
-                {"k1", "v1"},
-                {"k2", 3}
-            };
-
-            // Act
-            var element = XElement.Parse(value);
-            var item = PlistConvert.Deserialize(element);
-
-            // Assert
-            Assert.Equal(expected, item);
+            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
         }
 
         [Fact]
@@ -128,42 +109,39 @@
             }
         }
 
-        [Theory]
-        [InlineData(true, "<true />")]
-        [InlineData(false, "<false />")]
-        [InlineData("Hallo", "<string>Hallo</string>")]
-        [InlineData(5, "<integer>5</integer>")]
-        [InlineData(5.1234, "<real>5.1234</real>")]
-        [InlineData(new object[0], "<array />")]
-        [InlineData(new byte[] { 0xA2, 0xA3, 0xB4 }, "<data>oqO0</data>")]
-        [InlineData(new[] { "Test1", "Test2" }, "<array><string>Test1</string><string>Test2</string></array>")]
-
-        public void CanSerializePlistEntry(object value, string expected)
-        {
-            // Act
-            var item = PlistConvert.Serialize(value);
-
-            // Assert
-            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
-        }
-
         [Fact]
-        public void CanSerializeDict()
+        public void CanDeserializeDict()
         {
             // Arrange
-            var expected = "<dict><key>k1</key><string>v1</string><key>k2</key><integer>3</integer></dict>";
+            var value = "<dict><key>k1</key><string>v1</string><key>k2</key><integer>3</integer></dict>";
 
-            var value = new Dictionary<string, object>
+            var expected = new Dictionary<string, object>
             {
                 {"k1", "v1"},
                 {"k2", 3}
             };
 
             // Act
-            var item = PlistConvert.Serialize(value);
+            var element = XElement.Parse(value);
+            var item = PlistConvert.Deserialize(element);
 
             // Assert
-            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
+            Assert.Equal(expected, item);
+        }
+
+        [Fact]
+        public void CanDeserializePlistDateTime()
+        {
+            // Arrange
+            var value = "<date>2016-05-03T11:40:00+00:00</date>";
+            var expected = new DateTimeOffset(2016, 05, 03, 11, 40, 00, TimeSpan.Zero);
+
+            // Act
+            var element = XElement.Parse(value);
+            var item = PlistConvert.Deserialize(element);
+
+            // Assert
+            Assert.Equal(expected, item);
         }
 
         [Fact]
@@ -220,9 +198,28 @@
         }
 
         [Fact]
+        public void CanSerializeDict()
+        {
+            // Arrange
+            var expected = "<dict><key>k1</key><string>v1</string><key>k2</key><integer>3</integer></dict>";
+
+            var value = new Dictionary<string, object>
+            {
+                {"k1", "v1"},
+                {"k2", 3}
+            };
+
+            // Act
+            var item = PlistConvert.Serialize(value);
+
+            // Assert
+            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
+        }
+
+        [Fact]
         public void SerializerAddDocHeader()
         {
-            var doc = PlistConvert.SerializeDocument(new Dictionary<string, object> { {"k1", 1} });
+            var doc = PlistConvert.SerializeDocument(new Dictionary<string, object> {{"k1", 1}});
 
             string result;
 
@@ -234,8 +231,9 @@
             }
 
 
-            Assert.StartsWith("<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">", result);
+            Assert.StartsWith(
+                "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">",
+                result);
         }
     }
 }
-
