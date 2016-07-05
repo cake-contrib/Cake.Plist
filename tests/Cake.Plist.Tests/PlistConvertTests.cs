@@ -16,9 +16,6 @@
         [InlineData("<string>Hallo</string>", "Hallo")]
         [InlineData("<integer>5</integer>", 5)]
         [InlineData("<real>5.1234</real>", 5.1234)]
-        [InlineData("<array />", new object[0])]
-        [InlineData("<data>oqO0</data>", new byte[] {0xA2, 0xA3, 0xB4})]
-        [InlineData("<array><string>Test1</string><string>Test2</string></array>", new[] {"Test1", "Test2"})]
         public void CanDeserializePlistEntry(string value, object expected)
         {
             // Act
@@ -35,9 +32,6 @@
         [InlineData("Hallo", "<string>Hallo</string>")]
         [InlineData(5, "<integer>5</integer>")]
         [InlineData(5.1234, "<real>5.1234</real>")]
-        [InlineData(new object[0], "<array />")]
-        [InlineData(new byte[] {0xA2, 0xA3, 0xB4}, "<data>oqO0</data>")]
-        [InlineData(new[] {"Test1", "Test2"}, "<array><string>Test1</string><string>Test2</string></array>")]
         public void CanSerializePlistEntry(object value, string expected)
         {
             // Act
@@ -45,6 +39,21 @@
 
             // Assert
             Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
+        }
+
+        [Fact]
+        public void CanDeserializeArray()
+        {
+            // Arrange
+            const string value = "<array><string>Test1</string><string>Test2</string></array>";
+            var expected = new[] {"Test1", "Test2"};
+
+            // Act
+            var element = XElement.Parse(value);
+            var item = PlistConvert.Deserialize(element);
+
+            // Assert
+            Assert.Equal(expected, item);
         }
 
         [Fact]
@@ -110,6 +119,22 @@
         }
 
         [Fact]
+        public void CanDeserializeData()
+        {
+            // Arrange
+            string value;
+            value = "<data>oqO0</data>";
+            var expected = new byte[] {0xA2, 0xA3, 0xB4};
+
+            // Act
+            var element = XElement.Parse(value);
+            var item = PlistConvert.Deserialize(element);
+
+            // Assert
+            Assert.Equal(expected, item);
+        }
+
+        [Fact]
         public void CanDeserializeDict()
         {
             // Arrange
@@ -120,6 +145,21 @@
                 {"k1", "v1"},
                 {"k2", 3}
             };
+
+            // Act
+            var element = XElement.Parse(value);
+            var item = PlistConvert.Deserialize(element);
+
+            // Assert
+            Assert.Equal(expected, item);
+        }
+
+        [Fact]
+        public void CanDeserializeEmptyArray()
+        {
+            // Arrange
+            const string value = "<array />";
+            var expected = new object[0];
 
             // Act
             var element = XElement.Parse(value);
@@ -142,6 +182,20 @@
 
             // Assert
             Assert.Equal(expected, item);
+        }
+
+        [Fact]
+        public void CanSerializeArray()
+        {
+            // Arrange
+            var value = new[] {"Test1", "Test2"};
+            const string expected = "<array><string>Test1</string><string>Test2</string></array>";
+
+            // Act
+            var item = PlistConvert.Serialize(value);
+
+            // Assert
+            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
         }
 
         [Fact]
@@ -198,6 +252,20 @@
         }
 
         [Fact]
+        public void CanSerializeData()
+        {
+            // Arrange
+            var value = new byte[] {0xA2, 0xA3, 0xB4};
+            const string expected = "<data>oqO0</data>";
+
+            // Act
+            var item = PlistConvert.Serialize(value);
+
+            // Assert
+            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
+        }
+
+        [Fact]
         public void CanSerializeDict()
         {
             // Arrange
@@ -208,6 +276,20 @@
                 {"k1", "v1"},
                 {"k2", 3}
             };
+
+            // Act
+            var item = PlistConvert.Serialize(value);
+
+            // Assert
+            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
+        }
+
+        [Fact]
+        public void CanSerializeEmptyArray()
+        {
+            // Arrange
+            var value = new object[0];
+            const string expected = "<array />";
 
             // Act
             var item = PlistConvert.Serialize(value);
