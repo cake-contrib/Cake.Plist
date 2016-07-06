@@ -1,5 +1,7 @@
 #addin "Cake.Xamarin"
 
+#tool "xunit.runner.console"
+
 // ARGUMENTS
 var target = Argument("target", "default");
 var configuration = Argument("configuration", "release");
@@ -24,7 +26,7 @@ var semVersion = local ? version : (version + string.Concat("-build-", buildNumb
 
 var prerelease = false;
 
-Setup(() => 
+Setup(_ => 
 {
     if(!local)
         Information(string.Format("Building {0} Version: {1} on branch {2}", projectTitle, semVersion, AppVeyor.Environment.Repository.Branch));
@@ -39,6 +41,8 @@ Task("clean")
         CleanDirectories(output);
         CleanDirectories(string.Format("./src/**/obj/{0}", configuration));
         CleanDirectories(string.Format("./src/**/bin/{0}", configuration));
+        CleanDirectories(string.Format("./tests/**/obj/{0}", configuration));
+        CleanDirectories(string.Format("./tests/**/bin/{0}", configuration));
     });
 
 Task("restore")
@@ -58,8 +62,6 @@ Task("patch-assembly-info")
 
 
 Task("build")
-    .IsDependentOn("restore")    
-    .IsDependentOn("patch-assembly-info")
     .Does(() => 
     {
         if(IsRunningOnWindows())
@@ -71,6 +73,21 @@ Task("build")
 Task("rebuild")
     .IsDependentOn("clean")
     .IsDependentOn("build");
+
+Task("test")
+   .Does(() => 
+    {
+        CreateDirectory("./output/xunit");
+    
+        var testLibs = GetFiles(string.Format("./tests/*/bin/{0}/**/*.Tests.dll", configuration)).ToArray();
+
+        XUnit2(testLibs, new XUnit2Settings
+        {
+            OutputDirectory = "./output/xunit",
+            HtmlReport = true,
+            Parallelism = ParallelismOption.All
+        });
+    });
 
 Task("pack")
     .Does(() => 
@@ -109,7 +126,11 @@ Task("pack")
 
 // default target is build
 Task("default")
-    .IsDependentOn("build");
+    .IsDependentOn("clean")
+    .IsDependentOn("restore")    
+    .IsDependentOn("patch-assembly-info")
+    .IsDependentOn("build")
+    .IsDependentOn("test");
 
 Task("appveyor")
     .Does(() => 

@@ -14,13 +14,13 @@
     public static class PlistAliases
     {
         /// <summary>
-        ///     Desierializes plist from xlm
+        ///     Desierializes plist from xml
         /// </summary>
         /// <param name="context"></param>
         /// <param name="xml">plist xml</param>
         /// <returns>deserialized plist as dynamic</returns>
         [CakeMethodAlias]
-        public static dynamic DeserializePlist(this ICakeContext context, string xml)
+        public static dynamic DeserializePlistXml(this ICakeContext context, string xml)
         {
             return PlistConvert.Deserialize(XElement.Parse(xml));
         }
@@ -32,6 +32,18 @@
         /// <param name="context"></param>
         /// <param name="file">xml plist file</param>
         /// <returns>deserialized plist as dynamic</returns>
+        /// <example>
+        /// <code>
+        /// var plist = File("./src/Demo/Info.plist");
+        /// dynamic data = DeserializePlist(plist);
+        /// 
+        /// data["CFBundleShortVersionString"] = version.AssemblySemVer;
+        /// data["CFBundleVersion"] = version.FullSemVer;
+        /// 
+        /// SerializePlist(plist, data);
+        /// </code>
+        /// Deserialize the plist and simply access properties via indexer. But, it is important to declare data as dynamic.
+        /// </example>
         [CakeMethodAlias]
         public static dynamic DeserializePlist(this ICakeContext context, FilePath file)
         {
@@ -49,6 +61,18 @@
         /// <param name="context"></param>
         /// <param name="file">target file</param>
         /// <param name="value">plist data</param>
+        /// <example>
+        /// <code>
+        /// var plist = File("./src/Demo/Info.plist");
+        /// dynamic data = DeserializePlist(plist);
+        /// 
+        /// data["CFBundleShortVersionString"] = version.AssemblySemVer;
+        /// data["CFBundleVersion"] = version.FullSemVer;
+        /// 
+        /// SerializePlist(plist, data);
+        /// </code>
+        /// Deserialize the plist and simply access properties via indexer. But, it is important to declare data as dynamic.
+        /// </example>
         [CakeMethodAlias]
         public static void SerializePlist(this ICakeContext context, FilePath file, object value)
         {
@@ -59,8 +83,8 @@
             using (var sw = new MemoryStream())
             using (var strw = new StreamWriter(sw))
             {
-                doc.Save(strw, SaveOptions.DisableFormatting);
-                result = Encoding.UTF8.GetString(sw.ToArray());
+                doc.Save(strw);
+                result = new UTF8Encoding(false).GetString(sw.ToArray());
             }
 
             File.WriteAllText(file.FullPath, result);
@@ -74,7 +98,7 @@
         /// <param name="value">plist data</param>
         /// <returns>serialized plist xml</returns>
         [CakeMethodAlias]
-        public static string SerializePlist(this ICakeContext context, object value)
+        public static string SerializePlistXml(this ICakeContext context, object value)
         {
             return PlistConvert.Serialize(value).ToString();
         }
