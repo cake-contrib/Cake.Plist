@@ -15,7 +15,7 @@ Task("update-ios-version")
     .Does(() => 
     {
         var plist = File("./src/Demo/Info.plist");
-        var data = DeserializePlist(plist);
+        dynamic data = DeserializePlist(plist);
         
         data["CFBundleShortVersionString"] = version.AssemblySemVer;
         data["CFBundleVersion"] = version.FullSemVer;
@@ -23,6 +23,8 @@ Task("update-ios-version")
         SerializePlist(plist, data);
     });
 ```
+> **IMPORTANT** You have to define the data variable explicied as `dynamic`. Otherwise Roslyn implies `object` which will follow in build error.
+
 
 ## Build
 
