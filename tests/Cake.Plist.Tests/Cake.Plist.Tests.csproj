@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlistAliasTests.cs" />
     <Compile Include="Issues\Issue3Tests.cs" />
     <Compile Include="PlistConvertTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -57,6 +57,21 @@
         }
 
         [Fact]
+        public void CanDeserializeDateTime()
+        {
+            // Arrange
+            const string value = "<date>2012-09-27</date>";
+            var expected = new DateTime(2012,09,27);
+
+            // Act
+            var element = XElement.Parse(value);
+            var item = PlistConvert.Deserialize(element);
+
+            // Assert
+            Assert.Equal(expected, item);
+        }
+
+        [Fact]
         public void CanDeserializeComplexPlist()
         {
             // Arrange
@@ -182,6 +197,34 @@
 
             // Assert
             Assert.Equal(expected, item);
+        }
+
+        [Fact]
+        public void CanSerializeDateTime()
+        {
+            // Arrange
+            const string expected = "<date>2012-09-27T10:25:13.000Z</date>";
+            var value = new DateTime(2012, 09, 27, 10,25,13);
+
+            // Act
+            var item = PlistConvert.Serialize(value);
+
+            // Assert
+            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
+        }
+
+        [Fact]
+        public void CanSerializeDateTimeOffset()
+        {
+            // Arrange
+            const string expected = "<date>2012-09-27T10:25:13.000Z</date>";
+            var value = new DateTimeOffset(2012, 09, 27, 12, 25, 13, TimeSpan.FromHours(2));
+
+            // Act
+            var item = PlistConvert.Serialize(value);
+
+            // Assert
+            Assert.Equal(expected, item.ToString(SaveOptions.DisableFormatting));
         }
 
         [Fact]
