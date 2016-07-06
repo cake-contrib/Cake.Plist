@@ -20,7 +20,7 @@
         /// <param name="xml">plist xml</param>
         /// <returns>deserialized plist as dynamic</returns>
         [CakeMethodAlias]
-        public static dynamic DeserializePlist(this ICakeContext context, string xml)
+        public static dynamic DeserializePlistXml(this ICakeContext context, string xml)
         {
             return PlistConvert.Deserialize(XElement.Parse(xml));
         }
@@ -59,8 +59,8 @@
             using (var sw = new MemoryStream())
             using (var strw = new StreamWriter(sw))
             {
-                doc.Save(strw, SaveOptions.DisableFormatting);
-                result = Encoding.UTF8.GetString(sw.ToArray());
+                doc.Save(strw);
+                result = new UTF8Encoding(false).GetString(sw.ToArray());
             }
 
             File.WriteAllText(file.FullPath, result);
