@@ -74,7 +74,7 @@
         /// <param name="value">plist data</param>
         /// <returns>serialized plist xml</returns>
         [CakeMethodAlias]
-        public static string SerializePlist(this ICakeContext context, object value)
+        public static string SerializePlistXml(this ICakeContext context, object value)
         {
             return PlistConvert.Serialize(value).ToString();
         }
