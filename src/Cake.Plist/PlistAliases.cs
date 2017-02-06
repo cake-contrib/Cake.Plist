@@ -36,10 +36,10 @@
         /// <code>
         /// var plist = File("./src/Demo/Info.plist");
         /// dynamic data = DeserializePlist(plist);
-        /// 
+        ///
         /// data["CFBundleShortVersionString"] = version.AssemblySemVer;
         /// data["CFBundleVersion"] = version.FullSemVer;
-        /// 
+        ///
         /// SerializePlist(plist, data);
         /// </code>
         /// Deserialize the plist and simply access properties via indexer. But, it is important to declare data as dynamic.
@@ -65,10 +65,10 @@
         /// <code>
         /// var plist = File("./src/Demo/Info.plist");
         /// dynamic data = DeserializePlist(plist);
-        /// 
+        ///
         /// data["CFBundleShortVersionString"] = version.AssemblySemVer;
         /// data["CFBundleVersion"] = version.FullSemVer;
-        /// 
+        ///
         /// SerializePlist(plist, data);
         /// </code>
         /// Deserialize the plist and simply access properties via indexer. But, it is important to declare data as dynamic.
