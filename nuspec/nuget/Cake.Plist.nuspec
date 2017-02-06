@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Cake.Plist</id>
+    <title>Cake.Plist</title>
+    <version>0.0.0</version>
+    <authors>Paul Reichelt</authors>
+    <owners>Paul Reichelt, cake-contrib</owners>
+    <description>Plist Addin for Cake Build Automation System</description>
+    <summary>The Plist Addin for Cake allows you to serialize and deserialize xml plists directly from .NET source code.</summary>
+    <licenseUrl>https://github.com/cake-contrib/Cake.Plist/blob/develop/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/cake-contrib/Cake.Plist</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright (c) Cake Contributions 2016 - Present</copyright>
+    <tags>Cake Script Plist</tags>
+  </metadata>
+  <files>
+    <file src="Cake.Plist.dll" target="lib\net45" />
+    <file src="Cake.Plist.pdb" target="lib\net45" />
+    <file src="Cake.Plist.xml" target="lib\net45" />
+  </files>
+</package>
