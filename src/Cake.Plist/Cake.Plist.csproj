@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{143925D6-5413-4013-88BB-520857259DEB}</ProjectGuid>
+    <ProjectGuid>{265B7687-3C3E-4AB2-9675-8CAE8F2577E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cake.Plist</RootNamespace>
@@ -32,9 +32,8 @@
     <DocumentationFile>bin\Release\Cake.Plist.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cake.Core, Version=0.17.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Cake.Core.0.17.0\lib\net45\Cake.Core.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Cake.Core">
+      <HintPath>..\packages\Cake.Core.0.17.0\lib\net45\Cake.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -46,6 +45,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="PlistAliases.cs" />
     <Compile Include="PlistConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.Net45.cs" />
