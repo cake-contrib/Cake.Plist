@@ -61,6 +61,7 @@ fi
 
 # Restore tools from NuGet.
 pushd $TOOLS_DIR >/dev/null
+mono $NUGET_EXE
 mono $NUGET_EXE install -ExcludeVersion -PreRelease -Source https://www.myget.org/F/cake/api/v3/index.json
 if [ $? -ne 0 ]; then
     echo "Could not restore NuGet packages."
