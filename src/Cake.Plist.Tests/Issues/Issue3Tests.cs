@@ -20,7 +20,7 @@ namespace Cake.Plist.Tests.Issues
             context.FileSystem.Returns(fileSystem);
             context.Environment.Returns(environment);
 
-            var plist = PlistAliases.DeserializePlist(context, "./Data/Issue3_Info.plist");
+            var plist = context.DeserializePlist("./Data/Issue3_Info.plist");
 
             // Assert
             Assert.NotNull(plist);
