@@ -1,6 +1,6 @@
 language: csharp
 script:
-  - ./build.sh
+  - ./build.sh -v diagnostic
 os:
   - linux
   - osx
