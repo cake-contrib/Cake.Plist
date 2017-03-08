@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FEB13B1A-E731-4D1A-95E7-127E01C38A56}"
+	ProjectSection(SolutionItems) = preProject
+		..\.appveyor.yml = ..\.appveyor.yml
+		..\.travis.yml = ..\.travis.yml
+		README.md = README.md
+		..\setup.cake = ..\setup.cake
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Plist", "Cake.Plist\Cake.Plist.csproj", "{265B7687-3C3E-4AB2-9675-8CAE8F2577E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Plist.Tests", "Cake.Plist.Tests\Cake.Plist.Tests.csproj", "{D23183D2-DD97-400C-AAEE-76570F54BF24}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{265B7687-3C3E-4AB2-9675-8CAE8F2577E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265B7687-3C3E-4AB2-9675-8CAE8F2577E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265B7687-3C3E-4AB2-9675-8CAE8F2577E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265B7687-3C3E-4AB2-9675-8CAE8F2577E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D23183D2-DD97-400C-AAEE-76570F54BF24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D23183D2-DD97-400C-AAEE-76570F54BF24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D23183D2-DD97-400C-AAEE-76570F54BF24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D23183D2-DD97-400C-AAEE-76570F54BF24}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

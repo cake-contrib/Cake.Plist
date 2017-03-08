@@ -1,46 +1,48 @@
 # Cake.Plist Addin 
 
-[//]: # (![AppVeyor master branch](https://img.shields.io/appveyor/ci/reicheltp/cake-Plist.svg))
-![nuget pre release](https://img.shields.io/nuget/vpre/Cake.Plist.svg)
-
 This Addin for the Cake Build Automation System allows you to serialize and deserialize xml plists. More about Cake at http://cakebuild.net
 
-## Use the addin
+[![License](http://img.shields.io/:license-mit-blue.svg)](http://cake-contrib.mit-license.org)
 
-To use the Plist in your cake file simply import it and define a task. In the following example we are updating the Info.plist of our iOS project.
-```cake
-#addin "Cake.Plist"
+## Information
 
-Task("update-ios-version")
-    .Does(() => 
-    {
-        var plist = File("./src/Demo/Info.plist");
-        dynamic data = DeserializePlist(plist);
-        
-        data["CFBundleShortVersionString"] = version.AssemblySemVer;
-        data["CFBundleVersion"] = version.FullSemVer;
-        
-        SerializePlist(plist, data);
-    });
-```
-> **IMPORTANT** You have to define the data variable explicied as `dynamic`. Otherwise Roslyn implies `object` which will follow in build error.
+||Stable|Pre-release|
+|:--:|:--:|:--:|
+|GitHub Release|-|[![GitHub release](https://img.shields.io/github/release/cake-contrib/Cake.Plist.svg)](https://github.com/cake-contrib/Cake.Plist/releases/latest)|
+|NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Plist.svg)](https://www.nuget.org/packages/Cake.Plist)|[![NuGet](https://img.shields.io/nuget/vpre/Cake.Plist.svg)](https://www.nuget.org/packages/Cake.Plist)|
 
+## Build Status
 
-## Build
+|Develop|Master|
+|:--:|:--:|
+|[![Build status](https://ci.appveyor.com/api/projects/status/2p79mwndsu6aulny/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-plist/branch/develop)|[![Build status](https://ci.appveyor.com/api/projects/status/2p79mwndsu6aulny/branch/develop?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-plist/branch/master)|
+
+## Code Coverage
+
+[![Coverage Status](https://coveralls.io/repos/github/cake-contrib/Cake.Plist/badge.svg?branch=develop)](https://coveralls.io/github/cake-contrib/Cake.Plist?branch=develop)
+
+## Quick Links
+
+- [Documentation](https://cake-contrib.github.io/Cake.Plist)
+
+## Chat Room
+
+Come join in the conversation about Cake.Plist in our Gitter Chat Room
+
+[![Join the chat at https://gitter.im/cake-contrib/Lobby](https://badges.gitter.im/cake-contrib/Lobby.svg)](https://gitter.im/cake-contrib/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
+## To build from source
 
 To build this package we are using Cake.
 
 On Windows PowerShell run:
 
 ```powershell
-./build restore
 ./build
 ```
 
 On OSX/Linux run:
+
 ```bash
-./build.sh restore
 ./build.sh
 ```
-
-Run `pack` alias to create a nuget package.

@@ -1,4 +1,6 @@
-﻿namespace Cake.Plist.Tests
+﻿using Cake.Core;
+
+namespace Cake.Plist.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -75,7 +77,7 @@
         public void CanDeserializeComplexPlist()
         {
             // Arrange
-            var value = File.ReadAllText("Data/Info.plist");
+            var value = Resources.Info_plist.NormalizeLineEndings();
 
             var expected = new Dictionary<string, object>
             {
@@ -124,7 +126,7 @@
             var a1 = expected.ToArray();
             var a2 = ((Dictionary<string, object>) item).ToArray();
 
-            // Assert.Equal is not working correct on dictionary. Therefore we iterate 
+            // Assert.Equal is not working correct on dictionary. Therefore we iterate
             for (var i = 0; i < a1.Length; i++)
             {
                 Assert.Equal(a1[i].Key, a2[i].Key);
@@ -245,7 +247,7 @@
         public void CanSerializeComplexPlist()
         {
             // Arrange
-            var fileContent = File.ReadAllText("Data/SerializeResult.plist");
+            var fileContent = Resources.SerializeResult_plist.NormalizeLineEndings();
             var expected = XElement.Parse(fileContent).ToString(SaveOptions.DisableFormatting);
 
             var value = new Dictionary<string, object>
