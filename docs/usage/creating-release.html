@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/Cake.Recipe/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/Cake.Recipe/assets/img/favicon.ico" type="image/x-icon">
-        <title>Cake.Recipe - Documentation</title>
+        <title>Cake.Recipe - How to create a release</title>
         <link href="/Cake.Recipe/assets/css/mermaid.css" rel="stylesheet">
         <link href="/Cake.Recipe/assets/css/highlight.css" rel="stylesheet">
         <link href="/Cake.Recipe/assets/css/bootstrap/bootstrap.css" rel="stylesheet" />
@@ -73,6 +73,7 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
+        <div><p><a href="https://github.com/cake-contrib/Cake.Recipe/tree/develop/docs/input/docs/usage/creating-release.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
     <div id="infobar-headings"></div>
 
                 </section>
@@ -88,11 +89,11 @@
 
                     </ul>
                 </li>
-                <li class="treeview">
+                <li class="treeview active">
                     <a href="/Cake.Recipe/docs/usage">Usage</a> <a href="#" class="expand"></a>
                     <ul class="treeview-menu">
                                         <li><a href="/Cake.Recipe/docs/usage/getting-started-with-cake-recipe">Getting Started With Cake Recipe</a></li>
-                <li><a href="/Cake.Recipe/docs/usage/creating-release">How to create a release</a></li>
+                <li class="selected"><a href="/Cake.Recipe/docs/usage/creating-release">How to create a release</a></li>
                 <li><a href="/Cake.Recipe/docs/usage/creating-packages">How to create a NuGet or Chocolatey Package</a></li>
                 <li><a href="/Cake.Recipe/docs/usage/previewing-documentation">How to preview documentation</a></li>
                 <li><a href="/Cake.Recipe/docs/usage/publishing-documentation">How to publish documentation</a></li>
@@ -112,72 +113,29 @@
 
 
 	<section class="content-header">
-		<h1>Documentation</h1>
+		<h1>How to create a release</h1>
 	</section>
 	<section class="content">
-		<p>This user guide, like Cake.Recipe itself, is under very active development. Some parts of it aren't 
-documented as completely as they need to be, but we gladly accept your contributions.</p>
-
-<p>We need your help to improve the documentation for Cake.Recipe, so if there is something that you 
-would like to add then you can edit the content directly on GitHub.</p>
-
-    <h1>Fundamentals</h1>
-        <p>The following contains all the pieces of core information that you will need in order to use Cake.Recipe.</p>
-			<div class="box">
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover two-cols-alt table-responsive">
-						
-						<tbody>
-								<tr>
-									<td><strong><a href="/Cake.Recipe/docs/fundamentals/environment-variables">Environment Variables</a></strong></td>
-									<td>
-									</td>
-								</tr>
-						</tbody>				
-					</table>
-				</div>
-			</div> 
-    <h1>Usage</h1>
-        <p>How to obtain, configure, and execute Cake.Recipe.</p>
-			<div class="box">
-				<div class="box-body no-padding">
-					<table class="table table-striped table-hover two-cols-alt table-responsive">
-						
-						<tbody>
-								<tr>
-									<td><strong><a href="/Cake.Recipe/docs/usage/getting-started-with-cake-recipe">Getting Started With Cake Recipe</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/Cake.Recipe/docs/usage/creating-release">How to create a release</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/Cake.Recipe/docs/usage/creating-packages">How to create a NuGet or Chocolatey Package</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/Cake.Recipe/docs/usage/previewing-documentation">How to preview documentation</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/Cake.Recipe/docs/usage/publishing-documentation">How to publish documentation</a></strong></td>
-									<td>
-									</td>
-								</tr>
-								<tr>
-									<td><strong><a href="/Cake.Recipe/docs/usage/cleaning-cache">How to clean AppVeyor cache</a></strong></td>
-									<td>
-									</td>
-								</tr>
-						</tbody>				
-					</table>
-				</div>
-			</div> 
+		<p>This document describes the suggested steps to release a new version using the <code>Cake.Recipe</code> script.</p>
+<div class="alert alert-info"><p>Please note that the following steps assume you're using <code>Cake.Recipe</code> on GitHub and with a GitFlow workflow.
+Both are not requirements though and you can adopt the steps to other environments.</p>
+</div>
+<ol>
+<li>Create a release branch (eg. release/1.2.3).</li>
+<li>Make sure that a GitHub milestone exists for this release.</li>
+<li>Make sure there were issues for all changes with the appropriate labels and the correct milestone set.</li>
+<li>Make sure that you have the following environment variables set in your local development environment:
+<ul>
+<li><a href="../fundamentals/environment-variables#github_username">GITHUB_USERNAME</a></li>
+<li><a href="../fundamentals/environment-variables#github_password">GITHUB_PASSWORD</a></li>
+</ul>
+</li>
+<li>Create a GitHub release draft by running: <code>.\build.ps1 -target releasenotes</code>.</li>
+<li>Check the generated release notes and make required manual changes.</li>
+<li>If release is ready finish release (merge back into <code>master</code> and <code>develop</code>) but don't tag the release yet.</li>
+<li>Publish the draft release on GitHub.</li>
+</ol>
+<p>The last step will tag the release and trigger another build including the publishing. The build will automatically publish the build artifacts to the GitHub release, publish to NuGet and notify about the new release through Twitter and Gitter, based on your specific settings.</p>
 
 	</section>
                 
