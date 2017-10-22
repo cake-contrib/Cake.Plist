@@ -277,3 +277,5 @@ __pycache__/
 tools/**
 !tools/packages.config
 BuildArtifacts/
+docs/input/tasks/
+packages.xml

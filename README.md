@@ -6,7 +6,7 @@ This Addin for the Cake Build Automation System allows you to serialize and dese
 
 ## Information
 
-||Stable|Pre-release|
+| |Stable|Pre-release|
 |:--:|:--:|:--:|
 |GitHub Release|-|[![GitHub release](https://img.shields.io/github/release/cake-contrib/Cake.Plist.svg)](https://github.com/cake-contrib/Cake.Plist/releases/latest)|
 |NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Plist.svg)](https://www.nuget.org/packages/Cake.Plist)|[![NuGet](https://img.shields.io/nuget/vpre/Cake.Plist.svg)](https://www.nuget.org/packages/Cake.Plist)|
