@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="/Cake.Plist/assets/img/favicon.ico" type="image/x-icon">
         <link rel="icon" href="/Cake.Plist/assets/img/favicon.ico" type="image/x-icon">
-        <title>Docs - Examples</title>
+        <title>Docs - API - global Namespace</title>
         <link href="/Cake.Plist/assets/css/mermaid.css" rel="stylesheet">
         <link href="/Cake.Plist/assets/css/highlight.css" rel="stylesheet">
         <link href="/Cake.Plist/assets/css/bootstrap/bootstrap.css" rel="stylesheet">
@@ -56,9 +56,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse pull-left" id="navbar-collapse">
                         <ul class="nav navbar-nav">                            
-                                    <li class="active"><a href="/Cake.Plist/docs">Documentation</a></li>
+                                    <li><a href="/Cake.Plist/docs">Documentation</a></li>
         <li><a href="/Cake.Plist/blog">Blog</a></li>
-        <li><a href="/Cake.Plist/api">API</a></li>
+        <li class="active"><a href="/Cake.Plist/api">API</a></li>
  
                         </ul>       
                     </div>
@@ -72,24 +72,65 @@
             <aside class="main-sidebar ">
                 <section class="infobar" data-spy="affix" data-offset-top="60" data-offset-bottom="200"> 
                     	
-        <div><p><a href="https://github.com/cake-contrib/Cake.Plist/tree/develop/docs/input/docs/usage/examples.md"><i class="fa fa-pencil-square" aria-hidden="true"></i> Edit Content</a></p></div>
-    <div id="infobar-headings"><h6>On This Page</h6><p><a href="#build-script">Build Script</a></p>
+	<div id="infobar-headings"><h6>On This Page</h6><p><a href="#Namespaces">Namespaces</a></p>
 <hr class="infobar-hidden">
 </div>
 
                 </section>
                 <section class="sidebar">                    
-                    
+                    	
+	    <script src="/assets/js/lunr.min.js"></script>
+    <script src="/assets/js/searchIndex.js"></script>
+    <div class="sidebar-form">
+        <div class="input-group">
+            <input type="text" name="search" id="search" class="form-control" placeholder="Search Types...">
+            <span class="input-group-btn">
+                <button class="btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+    </div>
+    <div id="search-results">
+    </div>
+    <script>
+        function runSearch(query){
+            $("#search-results").empty();			
+            if( query.length < 2 ){
+                return;
+            }			
+            var results = searchModule.search("*" + query + "*");
+            var listHtml = "<ul class='sidebar-menu'>";	
+            listHtml += "<li class='header'>Type Results</li>";	
+            if(results.length == 0 ){
+                listHtml += "<li>No results found</li>";
+            } else {					
+                for(var i = 0; i < results.length; ++i){
+                    var res = results[i];
+                    listHtml += "<li><a href='" + res.url + "'>" + res.title + "</a></li>";
+                }				
+            }
+            listHtml += "</ul>";				
+            $("#search-results").append(listHtml);
+        }
+
+        $(document).ready(function(){
+            $("#search").on('input propertychange paste', function() {
+                runSearch($("#search").val());
+            });
+        });
+    </script>
+	
+    <hr>
 
                     <ul class="sidebar-menu">
                         
-                <li class="treeview active">
-                    <a href="/Cake.Plist/docs/usage">Usage</a> <a href="#" class="expand"></a>
-                    <ul class="treeview-menu">
-                                        <li class="selected"><a href="/Cake.Plist/docs/usage/examples">Examples</a></li>
+	<li class="header">Namespaces</li>   
 
-                    </ul>
-                </li>
+				<li class="treeview">
+				<a href="/Cake.Plist/api/Cake">Cake</a> <a href="#" class="expand"></a>
+				<ul class="treeview-menu">
+						<li><a href="/Cake.Plist/api/Cake.Plist">Cake<wbr>.Plist</a></li>
+</ul></li>			<li class=" selected"><a href="/Cake.Plist/api/global">global</a></li>
+      
 
                     </ul>
                 </section>                
@@ -101,30 +142,34 @@
 
 
 
-	<section class="content-header">
-		<h1>Examples</h1>
-	</section>
-	<section class="content">
-		<h1 id="build-script">Build Script</h1>
-<p>To use the Plist in your cake file simply import it and define a task. In the following example we are updating the Info.plist of our iOS project.</p>
-<pre><code class="language-cake">#addin "Cake.Plist"
+<section class="content-header">
+	<h1>global <small>Namespace</small></h1>
+</section>
+<section class="content">
+	
+	
+	
 
-Task("update-ios-version")
-    .Does(() =&gt;
-    {
-        var plist = File("./src/Demo/Info.plist");
-        dynamic data = DeserializePlist(plist);
-
-        data["CFBundleShortVersionString"] = version.AssemblySemVer;
-        data["CFBundleVersion"] = version.FullSemVer;
-
-        SerializePlist(plist, data);
-    });
-</code></pre>
-<div class="alert alert-info"><p><strong>IMPORTANT</strong> You have to define the data variable explicied as <code>dynamic</code>. Otherwise Roslyn implies <code>object</code> which will follow in build error.</p>
-</div>
-
-	</section>
+			<h1 id="Namespaces">Namespaces</h1>
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<table class="table table-striped table-hover two-cols">
+						<thead>
+							<tr>
+								<th>Namespace</th>
+									<th>Summary</th>
+							</tr>
+						</thead>
+							<tbody><tr>
+								<td><a href="/Cake.Plist/api/Cake">Cake</a></td>
+									<td></td>
+							</tr>
+					</tbody></table>
+				</div>
+			</div>
+		
+	
+</section>
                 
             </div>           
             
