@@ -16,8 +16,10 @@
     <tags>Cake Script Plist</tags>
   </metadata>
   <files>
-    <file src="Cake.Plist.dll" target="lib\net45" />
-    <file src="Cake.Plist.pdb" target="lib\net45" />
-    <file src="Cake.Plist.xml" target="lib\net45" />
+    <file src="net46\Cake.Plist.dll" target="lib\net46" />
+    <file src="net46\Cake.Plist.pdb" target="lib\net46" />
+    <file src="net46\Cake.Plist.xml" target="lib\net46" />
+    <file src="netstandard2.0\Cake.Plist.dll" target="lib/netstandard2.0" />
+    <file src="netstandard2.0\Cake.Plist.pdb" target="lib/netstandard2.0" />
   </files>
 </package>
