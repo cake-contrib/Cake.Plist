@@ -15,7 +15,7 @@ BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(context: Context,
                             dupFinderExcludePattern: new string[] {
-                                BuildParameters.RootDirectoryPath + "/src/Cake.Plist.Tests/*.cs", BuildParameters.RootDirectoryPath + "/Source/Cake.Plist/**/*.AssemblyInfo.cs" },
+                                BuildParameters.RootDirectoryPath + "/src/Cake.Plist.Tests/*.cs", BuildParameters.RootDirectoryPath + "/Src/Cake.Plist/**/*.AssemblyInfo.cs" },
                             testCoverageFilter: "+[*]* -[xunit.*]* -[Cake.Core]* -[Cake.Testing]* -[*.Tests]* ",
                             testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
                             testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
