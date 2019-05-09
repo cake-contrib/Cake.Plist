@@ -1,18 +1,16 @@
-﻿using Cake.Core;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using Cake.Core;
 using Cake.Testing;
 using NSubstitute;
+using Xunit;
 
 namespace Cake.Plist.Tests
 {
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using Core.IO;
-    using Xunit;
-
     public class PlistAliasTests
     {
-        [Fact]
+        [WindowsFact]
         public void Deserialize_missing_file_throws_exception()
         {
             var environment = FakeEnvironment.CreateWindowsEnvironment();
@@ -24,7 +22,7 @@ namespace Cake.Plist.Tests
             Assert.Throws<FileNotFoundException>(() => PlistAliases.DeserializePlist(context, "./file-doesnt-exist"));
         }
 
-        [Fact]
+        [WindowsFact]
         public void Read_write_compare()
         {
             // Arrange

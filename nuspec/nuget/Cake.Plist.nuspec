@@ -10,7 +10,7 @@
     <summary>The Plist Addin for Cake allows you to serialize and deserialize xml plists directly from .NET source code.</summary>
     <licenseUrl>https://github.com/cake-contrib/Cake.Plist/blob/develop/LICENSE</licenseUrl>
     <projectUrl>https://github.com/cake-contrib/Cake.Plist</projectUrl>
-    <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+    <iconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright (c) Cake Contributions 2016 - Present</copyright>
     <tags>Cake Script Plist</tags>
