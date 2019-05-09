@@ -1,15 +1,13 @@
 ﻿using Cake.Core;
 using Cake.Testing;
 using NSubstitute;
+using Xunit;
 
 namespace Cake.Plist.Tests.Issues
 {
-    using Core.IO;
-    using Xunit;
-
     public class Issue3Tests
     {
-        [Fact]
+        [WindowsFact]
         public void CanDeserializePlist()
         {
             // Arrange

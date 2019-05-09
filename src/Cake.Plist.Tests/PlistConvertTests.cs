@@ -1,15 +1,14 @@
-﻿using Cake.Core;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Xml.Linq;
+using Cake.Core;
+using Xunit;
 
 namespace Cake.Plist.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Xml.Linq;
-    using Xunit;
-
     public sealed class PlistConvertTests
     {
         [Theory]

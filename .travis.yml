@@ -1,9 +1,19 @@
 language: csharp
 script:
-  - ./build.sh -v diagnostic
+  - ./build.sh --verbosity=diagnostic
+
 os:
   - linux
   - osx
+
+# Ubuntu 16.04
+sudo: required
+dist: xenial
+
+mono:
+  - latest
+dotnet: 2.1.502
+
 cache:
   directories:
     - packages
