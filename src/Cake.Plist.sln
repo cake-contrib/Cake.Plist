@@ -8,7 +8,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.appveyor.yml = ..\.appveyor.yml
 		..\.travis.yml = ..\.travis.yml
 		README.md = README.md
-		..\setup.cake = ..\setup.cake
+		..\recipe.cake = ..\recipe.cake
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Plist", "Cake.Plist\Cake.Plist.csproj", "{265B7687-3C3E-4AB2-9675-8CAE8F2577E3}"
